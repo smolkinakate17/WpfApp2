@@ -1,0 +1,44 @@
+﻿<Window x:Class="WpfApp2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp2"
+        xmlns:vm="clr-namespace:WpfApp2.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <TabControl HorizontalAlignment="Left" Height="421" VerticalAlignment="Top" Width="793" Margin="0,0,0,-0.333">
+            <TabItem Header="Подсчет">
+                <Grid Background="#FFE5E5E5">
+                    <TextBox x:Name="Number1" Margin="20,43,0,0"  HorizontalAlignment="Left" Width="110" Height="18" VerticalAlignment="Top" Text="{Binding Path=Num1, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBox x:Name="Number2" Margin="190,43,486.667,0"  Height="18" VerticalAlignment="Top" HorizontalAlignment="Center" Width="110" Text="{Binding Path=Num2, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock HorizontalAlignment="Left" Margin="156,45,0,0" TextWrapping="Wrap" Text="+" VerticalAlignment="Top"/>
+                    <Button Content="Рассчитать" HorizontalAlignment="Left" Margin="30,83,0,0" VerticalAlignment="Top" Command="{Binding Path=SumCommand}" ></Button>
+                    <TextBlock HorizontalAlignment="Left" Margin="30,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="56"><Run Language="ru-ru" Text="Результат:"/></TextBlock>
+                    <TextBox Name="Number3" HorizontalAlignment="Left" Margin="104,128,0,0" TextWrapping="Wrap" Text="{Binding Path=Result}" IsReadOnly="True" VerticalAlignment="Top" Width="120"/>
+                    <Button Content="Сохранить" HorizontalAlignment="Left" Margin="30,195,0,0" VerticalAlignment="Top" Command="{Binding Path=SaveCommand}" />
+                </Grid>
+                
+            </TabItem>
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="Grid" AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray"
+    RowBackground="LightGray" AlternatingRowBackground="White" ItemsSource="{Binding Info}" Margin="0,0,0,54">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Первое число" Binding="{Binding Number1}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Второе число" Binding="{Binding Number2}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Результат" Binding="{Binding Result}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Дата расчета" Binding="{Binding Date}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                   
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>
