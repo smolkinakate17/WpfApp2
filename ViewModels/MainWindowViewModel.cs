@@ -9,6 +9,7 @@ using WpfApp2.Infrostructure.Commands;
 using WpfApp2.Models;
 using System.Text.Json;
 using System.IO;
+using System.Reflection;
 
 namespace WpfApp2.ViewModels
 {
@@ -102,6 +103,16 @@ namespace WpfApp2.ViewModels
             };
             string fileName = "saving.json";
             string jsonString = toJson.ToString();
+            var appDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var relativePath = @"saving.json";
+            var fullPath = Path.Combine(appDir, relativePath);
+            if (!File.Exists(fullPath))
+            {
+                FileStream fs = File.Create(fullPath);
+                fs.Close();
+            }
+            
+
             string readFile = File.ReadAllText(fileName);
             if (readFile.Length == 0)
             {
